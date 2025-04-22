@@ -1,0 +1,19 @@
+meta {
+  name: kms equips
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{openapi_base_url}}/maplestory/v1/character/item-equipment?ocid={{kms_ocid}}
+  body: none
+  auth: none
+}
+
+params:query {
+  ocid: {{kms_ocid}}
+}
+
+headers {
+  x-nxopen-api-key: {{kms_key}}
+}

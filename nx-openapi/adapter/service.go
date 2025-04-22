@@ -2,9 +2,10 @@ package adapter
 
 import (
 	"encoding/json"
-	"fmt"
+	"errors"
+	"io"
 	"net/http"
-	"path"
+	"net/url"
 
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/types"
 )
@@ -59,7 +60,13 @@ func NewService(baseURL, apiKey string) OpenAPIService {
 }
 
 func (s *service) GetCharacterOCID(ign string) (*GetCharacterIDResponse, error) {
-	req, err := http.NewRequest(http.MethodGet, path.Join(s.baseURL, fmt.Sprintf("/v1/id?%s=%s", getIdIGNParam, ign)), nil)
+	u, _ := url.Parse(s.baseURL)
+	u = u.JoinPath("v1/id")
+	q := u.Query()
+	q.Add(getIdIGNParam, ign)
+	u.RawQuery = q.Encode()
+
+	req, err := http.NewRequest(http.MethodGet, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -70,13 +77,16 @@ func (s *service) GetCharacterOCID(ign string) (*GetCharacterIDResponse, error) 
 		return nil, err
 	}
 
+	if res.StatusCode >= http.StatusBadRequest {
+		b, _ := io.ReadAll(res.Body)
+		k := string(b)
+		return nil, errors.New(k)
+	}
+
 	b := res.Body
 	defer b.Close()
-	buffer := []byte{}
-	b.Read(buffer)
-
+	buffer, _ := io.ReadAll(b)
 	r := GetCharacterIDResponse{}
-
 	err = json.Unmarshal(buffer, &r)
 	if err != nil {
 		return nil, err
@@ -87,13 +97,21 @@ func (s *service) GetCharacterOCID(ign string) (*GetCharacterIDResponse, error) 
 
 func (s *service) SetCharacter(ign string) {
 	r, err := s.GetCharacterOCID(ign)
-	if err == nil && r != nil && len(r.OCID) == 0 {
+	if err == nil && r != nil {
 		s.ocid = r.OCID
 	}
 }
 
 func (s *service) GetCharacterEquipment(ocid string) (*GetCharacterEquipmentResponse, error) {
-	req, err := http.NewRequest(http.MethodGet, path.Join(s.baseURL, fmt.Sprintf("/v1/character/item-equipment?%s=%s", ocidParam, ocid)), nil)
+	u, _ := url.Parse(s.baseURL)
+	u = u.JoinPath("v1/character/item-equipment")
+	q := u.Query()
+	q.Add(ocidParam, ocid)
+	u.RawQuery = q.Encode()
+
+	k := u.String()
+
+	req, err := http.NewRequest(http.MethodGet, k, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -103,11 +121,15 @@ func (s *service) GetCharacterEquipment(ocid string) (*GetCharacterEquipmentResp
 	if err != nil {
 		return nil, err
 	}
+	if res.StatusCode >= http.StatusBadRequest {
+		b, _ := io.ReadAll(res.Body)
+		k := string(b)
+		return nil, errors.New(k)
+	}
 
 	b := res.Body
 	defer b.Close()
-	buffer := []byte{}
-	b.Read(buffer)
+	buffer, _ := io.ReadAll(b)
 
 	r := GetCharacterEquipmentResponse{}
 	err = json.Unmarshal(buffer, &r)

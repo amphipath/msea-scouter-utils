@@ -1,22 +1,6 @@
 package types
 
-import "time"
-
 type (
-	CharacterEquipmentResponse struct {
-		Date              string      `json:"date"`
-		Gender            string      `json:"character_gender"`
-		Class             string      `json:"character_class"`
-		PresetNo          int         `json:"preset_no"`
-		ItemEquipment     []Equipment `json:"item_equipment"`
-		Preset1           []Equipment `json:"item_equipment_preset_1"`
-		Preset2           []Equipment `json:"item_equipment_preset_2"`
-		Preset3           []Equipment `json:"item_equipment_preset_3"`
-		Title             Title       `json:"title"`
-		DragonEquipment   []Equipment `json:"dragon_equipment"`
-		MechanicEquipment []Equipment `json:"mechanic-equipment"`
-	}
-
 	Equipment struct {
 		Part                           string         `json:"item_equipment_part"`
 		Slot                           string         `json:"item_equipment_slot"`
@@ -55,7 +39,7 @@ type (
 		StarforceScrollFlag            *string        `json:"starforce_scroll_flag"`
 		StarforceStats                 EquipmentStats `json:"item_starforce_option"`
 		SpecialRingLevel               int            `json:"special_ring_level"`
-		ExpiryDate                     *time.Time     `json:"date_expire,omitempty"`
+		ExpiryDate                     *string        `json:"date_expire,omitempty"`
 	}
 
 	EquipmentStats struct {
@@ -82,10 +66,10 @@ type (
 	}
 
 	Title struct {
-		Name           string     `json:"title_name"`
-		Icon           string     `json:"title_icon"`
-		Description    string     `json:"title_description"`
-		ExpiryDate     *time.Time `json:"date_expire,omitempty"`
-		StatExpiryDate *time.Time `json:"date_option_expire,omitempty"`
+		Name           string  `json:"title_name"`
+		Icon           string  `json:"title_icon"`
+		Description    string  `json:"title_description"`
+		ExpiryDate     *string `json:"date_expire,omitempty"`
+		StatExpiryDate *string `json:"date_option_expire,omitempty"`
 	}
 )

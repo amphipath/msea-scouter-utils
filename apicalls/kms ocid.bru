@@ -1,0 +1,27 @@
+meta {
+  name: kms ocid
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{openapi_base_url}}/maplestory/v1/id?character_name=세계
+  body: none
+  auth: none
+}
+
+params:query {
+  character_name: 세계
+}
+
+headers {
+  x-nxopen-api-key: {{kms_key}}
+}
+
+script:post-response {
+  ocid = res.getBody().ocid
+  
+  if (ocid) {
+    bru.setEnvVar("kms_ocid",ocid)
+  }
+}
