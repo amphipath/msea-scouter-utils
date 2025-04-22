@@ -17,13 +17,7 @@ type PossibleValues struct {
 }
 
 var (
-	igns = []string{
-		"Wicks",
-		"Fyri",
-		"vireys",
-		"Topup",
-		"Results",
-	}
+	igns = []string{}
 )
 
 func main() {
