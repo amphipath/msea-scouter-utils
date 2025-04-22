@@ -1,5 +1,7 @@
 package types
 
+import "time"
+
 type (
 	CharacterEquipmentResponse struct {
 		Date              string      `json:"date"`
@@ -49,6 +51,11 @@ type (
 		SoulName                       *string        `json:"soul_name"`
 		SoulStats                      *string        `json:"soul_option"`
 		ItemScrolledStats              EquipmentStats `json:"item_etc_option"`
+		Starforce                      *string        `json:"starforce"`
+		StarforceScrollFlag            *string        `json:"starforce_scroll_flag"`
+		StarforceStats                 EquipmentStats `json:"item_starforce_option"`
+		SpecialRingLevel               int            `json:"special_ring_level"`
+		ExpiryDate                     *time.Time     `json:"date_expire,omitempty"`
 	}
 
 	EquipmentStats struct {
@@ -75,10 +82,10 @@ type (
 	}
 
 	Title struct {
-		Name           string  `json:"title_name"`
-		Icon           string  `json:"title_icon"`
-		Description    string  `json:"title_description"`
-		ExpiryDate     *string `json:"date_expire,omitempty"`
-		StatExpiryDate *string `json:"date_option_expire,omitempty"`
+		Name           string     `json:"title_name"`
+		Icon           string     `json:"title_icon"`
+		Description    string     `json:"title_description"`
+		ExpiryDate     *time.Time `json:"date_expire,omitempty"`
+		StatExpiryDate *time.Time `json:"date_option_expire,omitempty"`
 	}
 )
