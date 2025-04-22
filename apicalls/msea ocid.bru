@@ -1,0 +1,27 @@
+meta {
+  name: msea ocid
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{openapi_base_url}}/maplestorysea/v1/id?character_name=vireys
+  body: none
+  auth: none
+}
+
+params:query {
+  character_name: vireys
+}
+
+headers {
+  x-nxopen-api-key: {{msea_key}}
+}
+
+script:post-response {
+  ocid = res.getBody().ocid
+  
+  if (ocid) {
+    bru.setEnvVar("msea_ocid",ocid)
+  }
+}

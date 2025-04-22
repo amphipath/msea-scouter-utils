@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "msea-scouter-apicalls",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}
