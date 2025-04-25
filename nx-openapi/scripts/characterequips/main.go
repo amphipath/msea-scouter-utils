@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"encoding/json"
 	"os"
 
@@ -17,13 +18,17 @@ type PossibleValues struct {
 	CharacterClass            map[string]string `json:"character_class,omitempty"`
 }
 
+//go:embed dictionary.json
+var rawDict []byte
+
 func main() {
 	apiKey := os.Getenv("NXOPENAPIKEY")
 	baseUrl := "https://open.api.nexon.com/maplestorysea"
 
 	s := adapter.NewService(baseUrl, apiKey)
 
-	data := PossibleValues{map[string]string{}, map[string]string{}, map[string]string{}, map[string]string{}, map[string]string{}}
+	data := PossibleValues{}
+	json.Unmarshal(rawDict, &data)
 
 	igns := resources.LoadIGNs()
 
@@ -36,7 +41,10 @@ func main() {
 		}
 
 		if r != nil {
-			data.CharacterClass[r.Class] = ""
+			if _, ok := data.CharacterClass[r.Class]; !ok {
+				data.CharacterClass[r.Class] = ""
+			}
+
 			for _, eq := range r.ItemEquipment {
 				logItem(data, eq)
 			}
@@ -57,12 +65,28 @@ func main() {
 }
 
 func logItem(data PossibleValues, eq types.Equipment) {
-	data.ItemEquipmentPart[eq.Part] = ""
-	data.ItemEquipmentSlot[eq.Slot] = ""
-	data.PotentialOption[eq.PotentialLine1] = ""
-	data.PotentialOption[eq.PotentialLine2] = ""
-	data.PotentialOption[eq.PotentialLine3] = ""
-	data.AdditionalPotentialOption[eq.AdditionalPotentialLine1] = ""
-	data.AdditionalPotentialOption[eq.AdditionalPotentialLine2] = ""
-	data.AdditionalPotentialOption[eq.AdditionalPotentialLine3] = ""
+	if _, ok := data.ItemEquipmentPart[eq.Part]; !ok {
+		data.ItemEquipmentPart[eq.Part] = ""
+	}
+	if _, ok := data.ItemEquipmentSlot[eq.Slot]; !ok {
+		data.ItemEquipmentSlot[eq.Slot] = ""
+	}
+	if _, ok := data.PotentialOption[eq.PotentialLine1]; !ok {
+		data.PotentialOption[eq.PotentialLine1] = ""
+	}
+	if _, ok := data.PotentialOption[eq.PotentialLine2]; !ok {
+		data.PotentialOption[eq.PotentialLine2] = ""
+	}
+	if _, ok := data.PotentialOption[eq.PotentialLine3]; !ok {
+		data.PotentialOption[eq.PotentialLine3] = ""
+	}
+	if _, ok := data.AdditionalPotentialOption[eq.AdditionalPotentialLine1]; !ok {
+		data.AdditionalPotentialOption[eq.AdditionalPotentialLine1] = ""
+	}
+	if _, ok := data.AdditionalPotentialOption[eq.AdditionalPotentialLine2]; !ok {
+		data.AdditionalPotentialOption[eq.AdditionalPotentialLine2] = ""
+	}
+	if _, ok := data.AdditionalPotentialOption[eq.AdditionalPotentialLine3]; !ok {
+		data.AdditionalPotentialOption[eq.AdditionalPotentialLine3] = ""
+	}
 }
