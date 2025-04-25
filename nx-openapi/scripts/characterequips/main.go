@@ -18,6 +18,7 @@ type PossibleValues struct {
 	AdditionalPotentialOption map[string]string `json:"additional_potential_option,omitempty"`
 	CharacterClass            map[string]string `json:"character_class,omitempty"`
 	Ability                   map[string]string `json:"ability,omitempty"`
+	LinkSkills                map[string]string `json:"link_skills,omitempty"`
 }
 
 //go:embed dictionary.json
@@ -114,7 +115,7 @@ func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues
 		abilRes, abilErr := svc.GetSetCharacterAbility()
 		time.Sleep(500 * time.Millisecond)
 		if abilErr != nil {
-			println(e.Error())
+			println(abilErr.Error())
 		}
 
 		if abilRes != nil {
@@ -150,6 +151,20 @@ func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues
 							data.Ability[abil.Value] = ""
 						}
 					}
+				}
+			}
+		}
+
+		linkRes, linkErr := svc.GetSetCharacterLinkSkill()
+		time.Sleep(500 * time.Millisecond)
+		if linkErr != nil {
+			println(linkErr.Error())
+		}
+
+		if linkRes != nil {
+			if linkRes.OwnedLinkSkill != nil {
+				if _, ok := data.LinkSkills[linkRes.OwnedLinkSkill.SkillName]; !ok {
+					data.LinkSkills[linkRes.OwnedLinkSkill.SkillName] = ""
 				}
 			}
 		}
