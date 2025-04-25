@@ -110,5 +110,48 @@ func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues
 				logItem(data, eq)
 			}
 		}
+
+		abilRes, abilErr := svc.GetSetCharacterAbility()
+		time.Sleep(500 * time.Millisecond)
+		if abilErr != nil {
+			println(e.Error())
+		}
+
+		if abilRes != nil {
+			for _, abil := range abilRes.AbilityInfo {
+				if len(abil.Value) > 0 {
+					if _, ok := data.Ability[abil.Value]; !ok {
+						data.Ability[abil.Value] = ""
+					}
+				}
+			}
+			if abilRes.Preset1 != nil {
+				for _, abil := range abilRes.Preset1.AbilityInfo {
+					if len(abil.Value) > 0 {
+						if _, ok := data.Ability[abil.Value]; !ok {
+							data.Ability[abil.Value] = ""
+						}
+					}
+				}
+			}
+			if abilRes.Preset2 != nil {
+				for _, abil := range abilRes.Preset2.AbilityInfo {
+					if len(abil.Value) > 0 {
+						if _, ok := data.Ability[abil.Value]; !ok {
+							data.Ability[abil.Value] = ""
+						}
+					}
+				}
+			}
+			if abilRes.Preset3 != nil {
+				for _, abil := range abilRes.Preset3.AbilityInfo {
+					if len(abil.Value) > 0 {
+						if _, ok := data.Ability[abil.Value]; !ok {
+							data.Ability[abil.Value] = ""
+						}
+					}
+				}
+			}
+		}
 	}
 }

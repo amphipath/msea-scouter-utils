@@ -13,9 +13,11 @@ import (
 type OpenAPIService interface {
 	GetCharacterEquipment(ocid string) (*GetCharacterEquipmentResponse, error)
 	GetCharacterOCID(ign string) (*GetCharacterIDResponse, error)
+	GetCharacterAbility(ocid string) (*GetCharacterAbilityResponse, error)
 
 	SetCharacter(IGN string)
 	GetSetCharacterEquipment() (*GetCharacterEquipmentResponse, error)
+	GetSetCharacterAbility() (*GetCharacterAbilityResponse, error)
 }
 
 type (
@@ -35,6 +37,17 @@ type (
 
 	GetCharacterIDResponse struct {
 		OCID string `json:"ocid"`
+	}
+
+	GetCharacterAbilityResponse struct {
+		Date         *string              `json:"date,omitempty"`
+		AbilityRank  string               `json:"ability_grade"`
+		AbilityInfo  []types.AbilityInfo  `json:"ability_info"`
+		HonourEXP    int                  `json:"remain_fame"`
+		PresetNumber int                  `json:"preset_no"`
+		Preset1      *types.AbilityPreset `json:"ability_preset_1"`
+		Preset2      *types.AbilityPreset `json:"ability_preset_2"`
+		Preset3      *types.AbilityPreset `json:"ability_preset_3"`
 	}
 
 	service struct {
@@ -141,4 +154,45 @@ func (s *service) GetCharacterEquipment(ocid string) (*GetCharacterEquipmentResp
 
 func (s *service) GetSetCharacterEquipment() (*GetCharacterEquipmentResponse, error) {
 	return s.GetCharacterEquipment(s.ocid)
+}
+
+func (s *service) GetCharacterAbility(ocid string) (*GetCharacterAbilityResponse, error) {
+	u, _ := url.Parse(s.baseURL)
+	u = u.JoinPath("v1/character/ability")
+	q := u.Query()
+	q.Add(ocidParam, ocid)
+	u.RawQuery = q.Encode()
+
+	k := u.String()
+
+	req, err := http.NewRequest(http.MethodGet, k, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Add(headerApiKey, s.apiKey)
+
+	res, err := s.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	if res.StatusCode >= http.StatusBadRequest {
+		b, _ := io.ReadAll(res.Body)
+		k := string(b)
+		return nil, errors.New(k)
+	}
+
+	b := res.Body
+	defer b.Close()
+	buffer, _ := io.ReadAll(b)
+
+	r := GetCharacterAbilityResponse{}
+	err = json.Unmarshal(buffer, &r)
+	if err != nil {
+		return nil, err
+	}
+	return &r, nil
+}
+
+func (s *service) GetSetCharacterAbility() (*GetCharacterAbilityResponse, error) {
+	return s.GetCharacterAbility(s.ocid)
 }
