@@ -6,6 +6,7 @@ import (
 
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/adapter"
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/types"
+	"github.com/amphipath/msea-scouter-utils/resources"
 )
 
 type PossibleValues struct {
@@ -16,10 +17,6 @@ type PossibleValues struct {
 	CharacterClass            map[string]string `json:"character_class,omitempty"`
 }
 
-var (
-	igns = []string{}
-)
-
 func main() {
 	apiKey := os.Getenv("NXOPENAPIKEY")
 	baseUrl := "https://open.api.nexon.com/maplestorysea"
@@ -27,6 +24,8 @@ func main() {
 	s := adapter.NewService(baseUrl, apiKey)
 
 	data := PossibleValues{map[string]string{}, map[string]string{}, map[string]string{}, map[string]string{}, map[string]string{}}
+
+	igns := resources.LoadIGNs()
 
 	for _, ign := range igns {
 		s.SetCharacter(ign)
