@@ -17,6 +17,7 @@ type PossibleValues struct {
 	PotentialOption           map[string]string `json:"potential_option,omitempty"`
 	AdditionalPotentialOption map[string]string `json:"additional_potential_option,omitempty"`
 	CharacterClass            map[string]string `json:"character_class,omitempty"`
+	Ability                   map[string]string `json:"ability,omitempty"`
 }
 
 //go:embed dictionary.json
