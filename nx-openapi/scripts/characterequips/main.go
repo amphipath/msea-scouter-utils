@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"encoding/json"
 	"os"
+	"time"
 
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/adapter"
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/types"
@@ -21,47 +22,34 @@ type PossibleValues struct {
 //go:embed dictionary.json
 var rawDict []byte
 
-func main() {
-	apiKey := os.Getenv("NXOPENAPIKEY")
-	baseUrl := "https://open.api.nexon.com/maplestorysea"
+//go:embed kmsDictionary.json
+var kmsDict []byte
 
+func main() {
+	apiKey := os.Getenv("MSEAAPIKEY")
+	kmsApiKey := os.Getenv("KMSAPIKEY")
+	baseUrl := "https://open.api.nexon.com/maplestorysea"
+	kmsBaseURL := "https://open.api.nexon.com/maplestory"
 	s := adapter.NewService(baseUrl, apiKey)
+	kmsService := adapter.NewService(kmsBaseURL, kmsApiKey)
 
 	data := PossibleValues{}
 	json.Unmarshal(rawDict, &data)
 
+	kmsData := PossibleValues{}
+	json.Unmarshal(kmsDict, &kmsData)
+
 	igns := resources.LoadIGNs()
+	kmsIgns := resources.LoadKMSIGNs()
 
-	for _, ign := range igns {
-		s.SetCharacter(ign)
-
-		r, e := s.GetSetCharacterEquipment()
-		if e != nil {
-			println(e.Error())
-		}
-
-		if r != nil {
-			if _, ok := data.CharacterClass[r.Class]; !ok {
-				data.CharacterClass[r.Class] = ""
-			}
-
-			for _, eq := range r.ItemEquipment {
-				logItem(data, eq)
-			}
-			for _, eq := range r.Preset1 {
-				logItem(data, eq)
-			}
-			for _, eq := range r.Preset2 {
-				logItem(data, eq)
-			}
-			for _, eq := range r.Preset3 {
-				logItem(data, eq)
-			}
-		}
-	}
+	populateDict(s, igns, data)
+	populateDict(kmsService, kmsIgns, kmsData)
 
 	b, _ := json.MarshalIndent(data, "", "  ")
 	os.WriteFile("./output.json", b, 0644)
+
+	b, _ = json.MarshalIndent(kmsData, "", "  ")
+	os.WriteFile("./kmsOutput.json", b, 0644)
 }
 
 func logItem(data PossibleValues, eq types.Equipment) {
@@ -88,5 +76,38 @@ func logItem(data PossibleValues, eq types.Equipment) {
 	}
 	if _, ok := data.AdditionalPotentialOption[eq.AdditionalPotentialLine3]; !ok {
 		data.AdditionalPotentialOption[eq.AdditionalPotentialLine3] = ""
+	}
+}
+
+func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues) {
+	for _, ign := range igns {
+		println(ign)
+		time.Sleep(500 * time.Millisecond)
+		svc.SetCharacter(ign)
+		time.Sleep(500 * time.Millisecond)
+
+		r, e := svc.GetSetCharacterEquipment()
+		if e != nil {
+			println(e.Error())
+		}
+
+		if r != nil {
+			if _, ok := data.CharacterClass[r.Class]; !ok {
+				data.CharacterClass[r.Class] = ""
+			}
+
+			for _, eq := range r.ItemEquipment {
+				logItem(data, eq)
+			}
+			for _, eq := range r.Preset1 {
+				logItem(data, eq)
+			}
+			for _, eq := range r.Preset2 {
+				logItem(data, eq)
+			}
+			for _, eq := range r.Preset3 {
+				logItem(data, eq)
+			}
+		}
 	}
 }
