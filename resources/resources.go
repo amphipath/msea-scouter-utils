@@ -9,5 +9,5 @@ import (
 var igns []byte
 
 func LoadIGNs() []string {
-	return strings.Split(string(igns), "\n")
+	return strings.Split(string(igns), "\r\n")
 }
