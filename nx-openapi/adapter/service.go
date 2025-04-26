@@ -67,7 +67,6 @@ type (
 	service struct {
 		ocid    string
 		baseURL string
-		apiKey  string
 		client  *http.Client
 	}
 )
@@ -77,11 +76,19 @@ const (
 )
 
 func NewService(baseURL, apiKey string) OpenAPIService {
-	return &service{
+	s := &service{
 		baseURL: baseURL,
-		apiKey:  apiKey,
-		client:  http.DefaultClient,
 	}
+	c := &http.Client{}
+	AddMiddlewaresToClient(
+		c,
+		Convert400ResponseToError(),
+		APIKeyHeaderMiddleware(apiKey),
+		ThrottleMiddleware(20),
+		RetryMiddleware(3),
+	)
+	s.client = c
+	return s
 }
 
 func (s *service) GetCharacterOCID(ign string) (*GetCharacterIDResponse, error) {
