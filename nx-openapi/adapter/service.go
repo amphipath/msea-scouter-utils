@@ -2,7 +2,6 @@ package adapter
 
 import (
 	"encoding/json"
-	"errors"
 	"io"
 	"net/http"
 	"net/url"
@@ -74,9 +73,7 @@ type (
 )
 
 const (
-	headerApiKey  = "x-nxopen-api-key"
 	getIdIGNParam = "character_name"
-	ocidParam     = "ocid"
 )
 
 func NewService(baseURL, apiKey string) OpenAPIService {
@@ -98,17 +95,10 @@ func (s *service) GetCharacterOCID(ign string) (*GetCharacterIDResponse, error) 
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add(headerApiKey, s.apiKey)
 
 	res, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
-	}
-
-	if res.StatusCode >= http.StatusBadRequest {
-		b, _ := io.ReadAll(res.Body)
-		k := string(b)
-		return nil, errors.New(k)
 	}
 
 	b := res.Body
@@ -143,16 +133,10 @@ func (s *service) GetCharacterEquipment(ocid string) (*GetCharacterEquipmentResp
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add(headerApiKey, s.apiKey)
 
 	res, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
-	}
-	if res.StatusCode >= http.StatusBadRequest {
-		b, _ := io.ReadAll(res.Body)
-		k := string(b)
-		return nil, errors.New(k)
 	}
 
 	b := res.Body
@@ -184,16 +168,10 @@ func (s *service) GetCharacterAbility(ocid string) (*GetCharacterAbilityResponse
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add(headerApiKey, s.apiKey)
 
 	res, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
-	}
-	if res.StatusCode >= http.StatusBadRequest {
-		b, _ := io.ReadAll(res.Body)
-		k := string(b)
-		return nil, errors.New(k)
 	}
 
 	b := res.Body
@@ -225,16 +203,10 @@ func (s *service) GetCharacterLinkSkill(ocid string) (*GetCharacterLinkSkillResp
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add(headerApiKey, s.apiKey)
 
 	res, err := s.client.Do(req)
 	if err != nil {
 		return nil, err
-	}
-	if res.StatusCode >= http.StatusBadRequest {
-		b, _ := io.ReadAll(res.Body)
-		k := string(b)
-		return nil, errors.New(k)
 	}
 
 	b := res.Body

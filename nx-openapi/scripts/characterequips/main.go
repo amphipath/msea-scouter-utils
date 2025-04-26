@@ -4,7 +4,6 @@ import (
 	_ "embed"
 	"encoding/json"
 	"os"
-	"time"
 
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/adapter"
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/types"
@@ -84,9 +83,7 @@ func logItem(data PossibleValues, eq types.Equipment) {
 func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues) {
 	for _, ign := range igns {
 		println(ign)
-		time.Sleep(500 * time.Millisecond)
 		svc.SetCharacter(ign)
-		time.Sleep(500 * time.Millisecond)
 
 		r, e := svc.GetSetCharacterEquipment()
 		if e != nil {
@@ -113,7 +110,6 @@ func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues
 		}
 
 		abilRes, abilErr := svc.GetSetCharacterAbility()
-		time.Sleep(500 * time.Millisecond)
 		if abilErr != nil {
 			println(abilErr.Error())
 		}
@@ -156,7 +152,6 @@ func populateDict(svc adapter.OpenAPIService, igns []string, data PossibleValues
 		}
 
 		linkRes, linkErr := svc.GetSetCharacterLinkSkill()
-		time.Sleep(500 * time.Millisecond)
 		if linkErr != nil {
 			println(linkErr.Error())
 		}
