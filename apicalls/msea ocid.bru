@@ -5,13 +5,14 @@ meta {
 }
 
 get {
-  url: {{openapi_base_url}}/maplestorysea/v1/id?character_name=YuriChae
+  url: {{openapi_base_url}}/maplestorysea/v1/id?character_name=BrokenSouI
   body: none
   auth: none
 }
 
 params:query {
-  character_name: YuriChae
+  character_name: BrokenSouI
+  ~ocid: {{msea_ocid}}
 }
 
 headers {
