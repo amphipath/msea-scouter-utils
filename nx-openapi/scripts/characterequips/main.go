@@ -8,17 +8,8 @@ import (
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/adapter"
 	"github.com/amphipath/msea-scouter-utils/nx-openapi/types"
 	"github.com/amphipath/msea-scouter-utils/resources"
+	"github.com/amphipath/msea-scouter-utils/translations"
 )
-
-type PossibleValues struct {
-	ItemEquipmentPart         map[string]string `json:"item_equipment_part,omitempty"`
-	ItemEquipmentSlot         map[string]string `json:"item_equipment_slot,omitempty"`
-	PotentialOption           map[string]string `json:"potential_option,omitempty"`
-	AdditionalPotentialOption map[string]string `json:"additional_potential_option,omitempty"`
-	CharacterClass            map[string]string `json:"character_class,omitempty"`
-	Ability                   map[string]string `json:"ability,omitempty"`
-	LinkSkills                map[string]string `json:"link_skills,omitempty"`
-}
 
 //go:embed dictionary.json
 var rawDict []byte
@@ -34,10 +25,10 @@ func populateDicionary() {
 	s := adapter.NewService(baseUrl, apiKey)
 	kmsService := adapter.NewService(kmsBaseURL, kmsApiKey)
 
-	data := PossibleValues{}
+	data := translations.PossibleValues{}
 	json.Unmarshal(rawDict, &data)
 
-	kmsData := PossibleValues{}
+	kmsData := translations.PossibleValues{}
 	json.Unmarshal(kmsDict, &kmsData)
 
 	igns := resources.LoadIGNs()
