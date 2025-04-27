@@ -388,6 +388,28 @@
         "kms": "제로",
         "msea": "Zero"
       }
+    },
+    "game_terms": {
+        "union_artifact": {
+            "kms": "유니온 아티팩트",
+            "msea": "Union Artifact"
+        },
+        "union_artifact_short": {
+            "kms": "아티팩트",
+            "msea": "UA"
+        },
+        "combat_power": {
+            "kms": "전투력",
+            "msea": "Combat Power"
+        },
+        "converted": {
+            "kms": "환산",
+            "msea": "Converted"
+        },
+        "mu_lung": {
+            "kms": "무릉 도장",
+            "msea": "Mu Lung Dojo",
+        }
     }
-  }
+}
   
