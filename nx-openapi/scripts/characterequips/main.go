@@ -26,7 +26,7 @@ var rawDict []byte
 //go:embed kmsDictionary.json
 var kmsDict []byte
 
-func main() {
+func populateDicionary() {
 	apiKey := os.Getenv("MSEAAPIKEY")
 	kmsApiKey := os.Getenv("KMSAPIKEY")
 	baseUrl := "https://open.api.nexon.com/maplestorysea"
@@ -51,6 +51,10 @@ func main() {
 
 	b, _ = json.MarshalIndent(kmsData, "", "  ")
 	os.WriteFile("./kmsOutput.json", b, 0644)
+}
+
+func main() {
+	populateDicionary()
 }
 
 func logItem(data PossibleValues, eq types.Equipment) {
