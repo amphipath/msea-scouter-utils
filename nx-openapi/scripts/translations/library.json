@@ -1,0 +1,393 @@
+{
+    "keys": {
+      "jobs": {
+        "job_adele": {
+          "kms": "아델",
+          "msea": "Adele"
+        },
+        "job_ab": {
+          "kms": "엔젤릭버스터",
+          "msea": "Angelic Buster"
+        },
+        "job_aran": {
+          "kms": "아란",
+          "msea": "Aran"
+        },
+        "job_fp": {
+          "kms": "아크메이지(불,독)",
+          "msea": "ArchMage F/P"
+        },
+        "job_il": {
+          "kms": "아크메이지(썬,콜)",
+          "msea": "ArchMage I/L"
+        },
+        "job_ark": {
+          "kms": "아크",
+          "msea": "Ark"
+        },
+        "job_battlemage": {
+          "kms": "배틀메이지",
+          "msea": "Battle Mage"
+        },
+        "job_bishop": {
+          "kms": "비숍",
+          "msea": "Bishop"
+        },
+        "job_db": {
+          "kms": "듀얼블레이더",
+          "msea": "Blade Master"
+        },
+        "job_blaster": {
+          "kms": "블래스터",
+          "msea": "Blaster"
+        },
+        "job_bowmaster": {
+          "kms": "보우마스터",
+          "msea": "Bowmaster"
+        },
+        "job_cadena": {
+          "kms": "카데나",
+          "msea": "Cadena"
+        },
+        "job_cannon": {
+          "kms": "캐논마스터",
+          "msea": "Cannon Master"
+        },
+        "job_captain": {
+          "kms": "캡틴",
+          "msea": "Captain"
+        },
+        "job_xbm": {
+          "kms": "신궁",
+          "msea": "Crossbow Master"
+        },
+        "job_dk": {
+          "kms": "다크나이트",
+          "msea": "Dark Knight"
+        },
+        "job_da": {
+          "kms": "데몬어벤져",
+          "msea": "Demon Avenger"
+        },
+        "job_ds": {
+          "kms": "데몬슬레이어",
+          "msea": "Demon Slayer"
+        },
+        "job_eunwol": {
+          "kms": "은월",
+          "msea": "Eunwol"
+        },
+        "job_evan": {
+          "kms": "에반",
+          "msea": "Evan"
+        },
+        "job_fw": {
+          "kms": "플레임위자드",
+          "msea": "Flame Wizard"
+        },
+        "job_hayato": {
+          "kms": "하야토",
+          "msea": "Hayato"
+        },
+        "job_hero": {
+          "kms": "히어로",
+          "msea": "Hero"
+        },
+        "job_hy": {
+          "kms": "호영",
+          "msea": "HoYoung"
+        },
+        "job_illium": {
+          "kms": "일리움",
+          "msea": "Illium"
+        },
+        "job_kaine": {
+          "kms": "카인",
+          "msea": "Kaine"
+        },
+        "job_kaiser": {
+          "kms": "카이저",
+          "msea": "Kaiser"
+        },
+        "job_kanna": {
+          "kms": "칸나",
+          "msea": "Kanna"
+        },
+        "job_khali": {
+          "kms": "칼리",
+          "msea": "Khali"
+        },
+        "job_kinesis": {
+          "kms": "키네시스",
+          "msea": "Kinesis"
+        },
+        "job_lara": {
+          "kms": "라라",
+          "msea": "Lara"
+        },
+        "job_luminous": {
+          "kms": "루미너스",
+          "msea": "Luminous"
+        },
+        "job_mechanic": {
+          "kms": "메카닉",
+          "msea": "Mechanic"
+        },
+        "job_mercedes": {
+          "kms": "메르세데스",
+          "msea": "Mercedes"
+        },
+        "job_mihile": {
+          "kms": "미하일",
+          "msea": "Mihile"
+        },
+        "job_nl": {
+          "kms": "나이트로드",
+          "msea": "Night Lord"
+        },
+        "job_nw": {
+          "kms": "나이트워커",
+          "msea": "Night Walker"
+        },
+        "job_paladin": {
+          "kms": "팔라딘",
+          "msea": "Paladin"
+        },
+        "job_pf": {
+          "kms": "패스파인더",
+          "msea": "Pathfinder"
+        },
+        "job_phantom": {
+          "kms": "팬텀",
+          "msea": "Phantom"
+        },
+        "job_shad": {
+          "kms": "섀도어",
+          "msea": "Shadower"
+        },
+        "job_sm": {
+          "kms": "소울마스터",
+          "msea": "Soul Master"
+        },
+        "job_striker": {
+          "kms": "스트라이커",
+          "msea": "Striker"
+        },
+        "job_viper": {
+          "kms": "바이퍼",
+          "msea": "Viper"
+        },
+        "job_wh": {
+          "kms": "와일드헌터",
+          "msea": "Wild Hunter"
+        },
+        "job_wb": {
+          "kms": "윈드브레이커",
+          "msea": "Wind Breaker"
+        },
+        "job_xenon": {
+          "kms": "제논",
+          "msea": "Xenon"
+        },
+        "job_zero": {
+          "kms": "제로",
+          "msea": "Zero"
+        }
+      }
+    },
+    "jobs_short": {
+      "job_adele": {
+        "kms": "아델",
+        "msea": "Adele"
+      },
+      "job_ab": {
+        "kms": "엔버",
+        "msea": "AB"
+      },
+      "job_aran": {
+        "kms": "아란",
+        "msea": "Aran"
+      },
+      "job_fp": {
+        "kms": "불독",
+        "msea": "F/P"
+      },
+      "job_il": {
+        "kms": "썬콜",
+        "msea": "I/L"
+      },
+      "job_ark": {
+        "kms": "아크",
+        "msea": "Ark"
+      },
+      "job_battlemage": {
+        "kms": "배메",
+        "msea": "BaM"
+      },
+      "job_bishop": {
+        "kms": "비숍",
+        "msea": "Bishop"
+      },
+      "job_db": {
+        "kms": "듀블",
+        "msea": "DB"
+      },
+      "job_blaster": {
+        "kms": "블래",
+        "msea": "Blaster"
+      },
+      "job_bowmaster": {
+        "kms": "보마",
+        "msea": "BM"
+      },
+      "job_cadena": {
+        "kms": "카데나",
+        "msea": "Cadena"
+      },
+      "job_cannon": {
+        "kms": "캐슈",
+        "msea": "CS"
+      },
+      "job_captain": {
+        "kms": "캡틴",
+        "msea": "Captain"
+      },
+      "job_xbm": {
+        "kms": "신궁",
+        "msea": "XBM"
+      },
+      "job_dk": {
+        "kms": "닼나",
+        "msea": "DrK"
+      },
+      "job_da": {
+        "kms": "데벤",
+        "msea": "DA"
+      },
+      "job_ds": {
+        "kms": "데슬",
+        "msea": "DS"
+      },
+      "job_eunwol": {
+        "kms": "은월",
+        "msea": "Eunwol"
+      },
+      "job_evan": {
+        "kms": "에반",
+        "msea": "Evan"
+      },
+      "job_fw": {
+        "kms": "플위",
+        "msea": "FW"
+      },
+      "job_hayato": {
+        "kms": "하야토",
+        "msea": "Hayato"
+      },
+      "job_hero": {
+        "kms": "히어로",
+        "msea": "Hero"
+      },
+      "job_hy": {
+        "kms": "호영",
+        "msea": "HoYoung"
+      },
+      "job_illium": {
+        "kms": "일리움",
+        "msea": "Illium"
+      },
+      "job_kaine": {
+        "kms": "카인",
+        "msea": "Kaine"
+      },
+      "job_kaiser": {
+        "kms": "카이저",
+        "msea": "Kaiser"
+      },
+      "job_kanna": {
+        "kms": "칸나",
+        "msea": "Kanna"
+      },
+      "job_khali": {
+        "kms": "칼리",
+        "msea": "Khali"
+      },
+      "job_kinesis": {
+        "kms": "키네",
+        "msea": "Kinesis"
+      },
+      "job_lara": {
+        "kms": "라라",
+        "msea": "Lara"
+      },
+      "job_luminous": {
+        "kms": "루미",
+        "msea": "Lumi"
+      },
+      "job_mechanic": {
+        "kms": "메카닉",
+        "msea": "Mech"
+      },
+      "job_mercedes": {
+        "kms": "메르",
+        "msea": "Merc"
+      },
+      "job_mihile": {
+        "kms": "미하일",
+        "msea": "Mihile"
+      },
+      "job_nl": {
+        "kms": "나로",
+        "msea": "NL"
+      },
+      "job_nw": {
+        "kms": "나워",
+        "msea": "NW"
+      },
+      "job_paladin": {
+        "kms": "팔라",
+        "msea": "Pala"
+      },
+      "job_pf": {
+        "kms": "패파",
+        "msea": "PF"
+      },
+      "job_phantom": {
+        "kms": "팬텀",
+        "msea": "Phant"
+      },
+      "job_shad": {
+        "kms": "섀도어",
+        "msea": "Shad"
+      },
+      "job_sm": {
+        "kms": "소마",
+        "msea": "SM"
+      },
+      "job_striker": {
+        "kms": "스커",
+        "msea": "Striker"
+      },
+      "job_viper": {
+        "kms": "바이퍼",
+        "msea": "Viper"
+      },
+      "job_wh": {
+        "kms": "와헌",
+        "msea": "WH"
+      },
+      "job_wb": {
+        "kms": "윈브",
+        "msea": "WB"
+      },
+      "job_xenon": {
+        "kms": "제논",
+        "msea": "Xenon"
+      },
+      "job_zero": {
+        "kms": "제로",
+        "msea": "Zero"
+      }
+    }
+  }
+  
